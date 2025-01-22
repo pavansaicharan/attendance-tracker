@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        <div class="result-card">
+            <h1>Attendance Summary</h1>
+            <div class="result-item">
+                <p><strong>Total Classes Conducted:</strong> <span>{{ conducted }}</span></p>
+            </div>
+            <div class="result-item">
+                <p><strong>Total Classes Attended:</strong> <span>{{ attended }}</span></p>
+            </div>
+            <div class="result-item">
+                <p><strong>Attendance Percentage:</strong> <span>{{ percentage }}%</span></p>
+            </div>
+            <div class="result-item">
+                <p><strong>Classes Needed for 75% Attendance:</strong> <span>{{ required_classes }}</span></p>
+            </div>
+
+            <form action="{{ url_for('index') }}" method="GET">
+                <button type="submit" class="back-btn">Back to Input</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

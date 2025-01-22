@@ -1,0 +1,228 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e8f5e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden; /* Prevents any overflow issues on smaller screens */
+}
+
+/* Container for both pages */
+.container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Title */
+h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 5vw; /* Responsive font size */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #387539;
+}
+
+/* Buttons for Increment */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.buttons button {
+    flex: 1;
+    max-width: 100px;
+    background-color: #2196F3;
+}
+
+.buttons button:hover {
+    background-color: #0b79c1;
+}
+
+/* Result Page Container */
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+}
+
+.result-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    width: 100%;
+}
+
+/* Title */
+.result-card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+    font-size: 5vw; /* Responsive font size */
+}
+
+/* Result Page */
+.result-card .result-item span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.result-item p {
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.result-item span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #1976D2;
+    transform: translateY(-5px);
+}
+
+.back-btn:active {
+    background-color: #1565C0;
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 4vw; /* Adjusted font size for mobile */
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    .result-card h1 {
+        font-size: 4vw; /* Adjusted font size for mobile */
+    }
+
+    .result-item {
+        font-size: 1rem;
+    }
+
+    .result-item span {
+        font-size: 1.2rem;
+    }
+
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .back-btn {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    .buttons button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
