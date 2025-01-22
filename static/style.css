@@ -28,7 +28,7 @@ body {
 }
 
 h1 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font */
+    font-size: 32px; /* Fixed size for title */
     color: #4CAF50;
     margin-bottom: 15px;
 }
@@ -42,7 +42,7 @@ form {
 
 input[type="number"], button {
     padding: 12px;
-    font-size: 1rem;
+    font-size: 16px; /* Fixed font size for inputs */
     border-radius: 8px;
     border: 1px solid #ccc;
 }
@@ -76,7 +76,8 @@ button:active {
     max-width: 100px;
     background-color: #2196F3;
     color: white;
-    font-size: 0.9rem;
+    font-size: 14px; /* Fixed font size for buttons */
+    padding: 10px;
 }
 
 .buttons button:hover {
@@ -89,7 +90,7 @@ button:active {
 }
 
 .result-item span {
-    font-size: 1.2rem;
+    font-size: 18px; /* Fixed size for result spans */
     font-weight: bold;
     color: #2e7d32;
 }
@@ -100,7 +101,7 @@ button:active {
     background-color: #2196F3;
     color: white;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 14px; /* Fixed font size for back button */
     text-decoration: none;
     border-radius: 20px;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -126,7 +127,7 @@ button:active {
 /* Responsive Design */
 @media (max-width: 768px) {
     h1 {
-        font-size: 1.8rem;
+        font-size: 28px;
     }
     .buttons button {
         max-width: 100%;
@@ -141,11 +142,11 @@ button:active {
         padding: 15px;
     }
     button, input[type="number"] {
-        font-size: 0.9rem;
+        font-size: 14px; /* Adjusted font size for small screens */
         padding: 10px;
     }
     .back-btn {
         padding: 8px 15px;
-        font-size: 0.9rem;
+        font-size: 12px; /* Reduced size for smaller screens */
     }
 }
