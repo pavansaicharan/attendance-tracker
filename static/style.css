@@ -11,54 +11,48 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 20px;
-    overflow: hidden; /* Prevents any overflow issues on smaller screens */
+    min-height: 100vh;
+    padding: 10px;
 }
 
-/* Container for both pages */
-.container {
+/* Container for Pages */
+.container, .result-card {
     background-color: #fff;
-    border-radius: 15px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    padding: 20px;
+    max-width: 500px;
     width: 100%;
-    max-width: 600px;
     text-align: center;
-    animation: fadeIn 1s ease-out;
+    animation: fadeIn 0.8s ease;
 }
 
-/* Title */
 h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font */
     color: #4CAF50;
-    margin-bottom: 20px;
-    font-size: 5vw; /* Responsive font size */
+    margin-bottom: 15px;
 }
 
-/* Form Styles */
+/* Form and Input Styles */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
-input[type="number"] {
-    padding: 10px;
+input[type="number"], button {
+    padding: 12px;
     font-size: 1rem;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 button {
-    padding: 10px;
-    font-size: 1rem;
     cursor: pointer;
-    border: none;
-    border-radius: 5px;
     background-color: #4CAF50;
     color: #fff;
-    transition: background-color 0.3s;
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -69,99 +63,59 @@ button:active {
     background-color: #387539;
 }
 
-/* Buttons for Increment */
+/* Increment Buttons */
 .buttons {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .buttons button {
     flex: 1;
     max-width: 100px;
     background-color: #2196F3;
+    color: white;
+    font-size: 0.9rem;
 }
 
 .buttons button:hover {
     background-color: #0b79c1;
 }
 
-/* Result Page Container */
-.result-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    height: 100%;
-}
-
-.result-card {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
-    animation: fadeIn 1s ease-out;
-    width: 100%;
-}
-
-/* Title */
-.result-card h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #4CAF50;
-    font-size: 5vw; /* Responsive font size */
-}
-
-/* Result Page */
-.result-card .result-item span {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2e7d32;
-}
-
-.result-item p {
-    font-weight: 600;
+/* Result Styles */
+.result-item {
     margin: 10px 0;
 }
 
 .result-item span {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: bold;
     color: #2e7d32;
 }
 
-/* Back Button */
 .back-btn {
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 20px;
     background-color: #2196F3;
     color: white;
-    padding: 12px 25px;
-    font-size: 1.1rem;
+    padding: 10px 20px;
+    font-size: 1rem;
     text-decoration: none;
-    border-radius: 30px;
-    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .back-btn:hover {
     background-color: #1976D2;
-    transform: translateY(-5px);
-}
-
-.back-btn:active {
-    background-color: #1565C0;
-    transform: translateY(0);
+    transform: translateY(-3px);
 }
 
 /* Animations */
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-15px);
     }
     100% {
         opacity: 1;
@@ -171,58 +125,27 @@ button:active {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
     h1 {
-        font-size: 4vw; /* Adjusted font size for mobile */
+        font-size: 1.8rem;
     }
-
-    .buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
     .buttons button {
-        width: 100%;
-    }
-
-    .result-card h1 {
-        font-size: 4vw; /* Adjusted font size for mobile */
-    }
-
-    .result-item {
-        font-size: 1rem;
-    }
-
-    .result-item span {
-        font-size: 1.2rem;
-    }
-
-    .back-btn {
-        padding: 10px 20px;
-        font-size: 1rem;
+        max-width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding: 10px;
+        padding: 5px;
     }
-
-    .container {
+    .container, .result-card {
         padding: 15px;
     }
-
-    .back-btn {
-        font-size: 1rem;
-        padding: 10px 15px;
-    }
-
-    .buttons button {
-        width: 100%;
-        font-size: 1rem;
+    button, input[type="number"] {
+        font-size: 0.9rem;
         padding: 10px;
+    }
+    .back-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
     }
 }
