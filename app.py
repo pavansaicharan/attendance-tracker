@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, session
-from flask_session import Session
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -13,7 +11,9 @@ def index():
         'current_attended': 0,
         'current_conducted': 0,
         'willing_to_attend': 0,
-        'conducted_to_add': 0
+        'conducted_to_add': 0,
+        'custom_percentage_attend': 75,
+        'custom_percentage_miss': 75
     }
 
     # Check if previous values are in session
@@ -26,13 +26,17 @@ def index():
         current_conducted = int(request.form['current_conducted'])
         willing_to_attend = int(request.form['willing_to_attend'])
         conducted_to_add = int(request.form['conducted_to_add'])
+        custom_percentage_attend = int(request.form.get('custom_percentage_attend', 75))  # Default to 75 if not provided
+        custom_percentage_miss = int(request.form.get('custom_percentage_miss', 75))  # Default to 75 if not provided
 
         # Update default values
         default_values = {
             'current_attended': current_attended,
             'current_conducted': current_conducted,
             'willing_to_attend': willing_to_attend,
-            'conducted_to_add': conducted_to_add
+            'conducted_to_add': conducted_to_add,
+            'custom_percentage_attend': custom_percentage_attend,
+            'custom_percentage_miss': custom_percentage_miss
         }
 
         # Store values in session
@@ -48,18 +52,31 @@ def index():
         else:
             attendance_percentage = 0
 
-        # Calculate classes needed for 75% attendance
-        if attendance_percentage < 75:
-            required_classes = max(0, int((0.75 * total_conducted - total_attended) / (1 - 0.75)))
-        else:
-            required_classes = 0
+        # Calculate required classes for custom percentage attendance
+        required_classes_custom = max(0, int((custom_percentage_attend * total_conducted - total_attended) / (1 - custom_percentage_attend / 100)))
+        max_classes_miss_custom = max(0, int((total_conducted - total_attended) * (1 - custom_percentage_miss / 100)))
+
+        # Default calculation for 75%
+        required_classes_75 = max(0, int((75 * total_conducted - total_attended) / (1 - 75 / 100)))
+        max_classes_miss_75 = max(0, int(total_attended - (75 / 100 * total_conducted)))
 
         return render_template(
             'result.html',
             attended=total_attended,
             conducted=total_conducted,
             percentage=attendance_percentage,
-            required_classes=required_classes
+            required_classes_custom=required_classes_custom,
+            max_classes_miss_custom=max_classes_miss_custom,
+            required_classes_75=required_classes_75,
+            max_classes_miss_75=max_classes_miss_75,
+            custom_percentage_attend=custom_percentage_attend,
+            custom_percentage_miss=custom_percentage_miss,
+            required_classes=required_classes_75,
+            max_classes_miss=max_classes_miss_75
         )
 
     return render_template('index.html', previous_values=default_values)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

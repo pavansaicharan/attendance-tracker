@@ -19,14 +19,43 @@
             <div class="result-item">
                 <p><strong>Attendance Percentage:</strong> <span>{{ percentage }}%</span></p>
             </div>
-            <div class="result-item">
-                <p><strong>Classes Needed for 75% Attendance:</strong> <span>{{ required_classes }}</span></p>
-            </div>
 
+            <!-- Custom percentages form -->
+            <label for="custom_percentage_attend">Enter % for Required Classes:</label>
+            <input type="number" id="custom_percentage_attend" value="{{ custom_percentage_attend }}" min="1" max="100" onchange="updateAttendance()">
+            <p><strong>Classes Needed to Attend:</strong> <span id="required_classes">{{ required_classes }}</span></p>
+
+            <label for="custom_percentage_miss">Enter % for Max Missable Classes:</label>
+            <input type="number" id="custom_percentage_miss" value="{{ custom_percentage_miss }}" min="1" max="100" onchange="updateAttendance()">
+            <p><strong>Classes Can Be Missed:</strong> <span id="max_classes_miss">{{ max_classes_miss }}</span></p>
+
+            <!-- Back button -->
             <form action="{{ url_for('index') }}" method="GET">
                 <button type="submit" class="back-btn">Back to Input</button>
             </form>
         </div>
     </div>
+
+    <script>
+        function updateAttendance() {
+            const totalConducted = {{ conducted }};
+            const totalAttended = {{ attended }};
+            const customPercentageAttend = document.getElementById('custom_percentage_attend').value / 100;
+            const customPercentageMiss = document.getElementById('custom_percentage_miss').value / 100;
+
+            // Calculate values based on custom percentages
+            const requiredClasses = Math.max(0, Math.ceil((customPercentageAttend * totalConducted - totalAttended) / (1 - customPercentageAttend)));
+            const maxMissableClasses = Math.max(0, Math.floor(totalAttended / customPercentageMiss - totalConducted));
+
+            // Update the displayed values
+            document.getElementById('required_classes').innerText = requiredClasses;
+            document.getElementById('max_classes_miss').innerText = maxMissableClasses;
+        }
+
+        // Initialize the page with 75% values
+        window.onload = function() {
+            updateAttendance();  // Initialize the default 75% calculations
+        };
+    </script>
 </body>
 </html>

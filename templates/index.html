@@ -10,13 +10,13 @@
     <div class="container">
         <h1>Attendance Tracker</h1>
         <form method="POST">
-            <label for="current_attended">Current Classes Attended:</label>
+            <label for="current_attended"> Classes Attended:</label>
             <input type="number" id="current_attended" name="current_attended" required 
                 value="{{ previous_values['current_attended'] }}" 
                 onfocus="clearDefaultValue(this)" 
                 onblur="restoreDefaultValue(this)">
 
-            <label for="current_conducted">Current Classes Conducted:</label>
+            <label for="current_conducted"> Classes Conducted:</label>
             <input type="number" id="current_conducted" name="current_conducted" required 
                 value="{{ previous_values['current_conducted'] }}" 
                 onfocus="clearDefaultValue(this)" 
@@ -35,7 +35,7 @@
                 <button type="button" onclick="incrementValue('willing_to_attend', 14)">+14</button>
             </div>
 
-            <label for="conducted_to_add">Classes to be Conducted:</label>
+            <label for="conducted_to_add">Classes to Be Conducted:</label>
             <input type="number" id="conducted_to_add" name="conducted_to_add" required 
                 value="{{ previous_values['conducted_to_add'] }}" 
                 onfocus="clearDefaultValue(this)" 
@@ -53,25 +53,42 @@
     </div>
 
     <script>
-        // Increment input value by specified amount
         function incrementValue(field, value) {
             const input = document.getElementById(field);
-            input.value = parseInt(input.value) + value;
+            let currentValue = parseInt(input.value);
+    
+            if (isNaN(currentValue)) {
+                currentValue = 0; // If the value is not a valid number, treat it as 0
+            }
+            
+            // Increment the value
+            input.value = currentValue + value;
         }
-
-        // Clears the default value (0) when the input is focused
+    
         function clearDefaultValue(input) {
+            // Only clear the default value when it is exactly 0
             if (input.value === "0") {
                 input.value = "";
             }
         }
-
-        // Restores the default value (0) if the input is left empty
+    
         function restoreDefaultValue(input) {
+            // If the input is empty, restore it back to "0"
             if (input.value === "") {
                 input.value = "0";
             }
         }
+    
+        // You might need to ensure the default value (0) is set when the page is loaded or reset.
+        window.onload = function() {
+            const inputs = document.querySelectorAll("input");
+            inputs.forEach(input => {
+                if (input.value === "") {
+                    input.value = "0";
+                }
+            });
+        };
     </script>
+    
 </body>
 </html>
